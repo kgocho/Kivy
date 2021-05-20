@@ -33,3 +33,7 @@ python body_composition.py
 ```
 
 # Demo
+
+https://user-images.githubusercontent.com/13479278/118995027-c8958180-b9c1-11eb-87a1-78bd0783930e.mp4
+
+
