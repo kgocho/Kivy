@@ -1,0 +1,154 @@
+#: import body_composition body_composition
+<MainScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        MainMenu:
+        Button:
+            text: '体重'
+            on_press: root.manager.get_screen('subscreen').show_graph(self.text)
+            on_press: root.manager.current = 'subscreen'
+        BoxLayout:
+            orientation: 'horizontal'
+
+            BoxLayout:
+                orientation: 'horizontal'
+
+                Button:
+                    text: '体脂肪率'
+                    size_hint_x: 0.5
+                    on_press: root.manager.get_screen('subscreen').show_graph(self.text)
+                    on_press: root.manager.current = 'subscreen'
+                Button:
+                    text: '体脂肪量'
+                    size_hint_x: 0.5
+                    on_press: root.manager.get_screen('subscreen').show_graph(self.text)
+                    on_press: root.manager.current = 'subscreen'
+            Button:
+                text: '内臓脂肪レベル'
+                on_press: root.manager.get_screen('subscreen').show_graph(self.text)
+                on_press: root.manager.current = 'subscreen'
+        BoxLayout:
+            orientation: 'horizontal'
+
+            BoxLayout:
+                orientation: 'horizontal'
+
+                Button:
+                    text: '骨格筋率'
+                    size_hint_x: 0.5
+                    on_press: root.manager.get_screen('subscreen').show_graph(self.text)
+                    on_press: root.manager.current = 'subscreen'
+                Button:
+                    text: '骨格筋量'
+                    size_hint_x: 0.5
+                    on_press: root.manager.get_screen('subscreen').show_graph(self.text)
+                    on_press: root.manager.current = 'subscreen'
+            Button:
+                text: '体年齢'
+                on_press: root.manager.get_screen('subscreen').show_graph(self.text)
+                on_press: root.manager.current = 'subscreen'
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Button:
+                text: '基礎代謝'
+                on_press: root.manager.get_screen('subscreen').show_graph(self.text)
+                on_press: root.manager.current = 'subscreen'
+            Button:
+                text: 'BMI'
+                on_press: root.manager.get_screen('subscreen').show_graph(self.text)
+                on_press: root.manager.current = 'subscreen'
+
+<SubScreen>:
+    graph: graph
+    BoxLayout:
+        orientation: 'vertical'
+
+        MainMenu:
+            size_hint_y: 0.28
+        ActionBar:
+            ActionView:
+                ActionPrevious:
+                    title: '戻る'
+                    with_previous: True
+                    on_press: root.manager.current = 'main'
+                ActionOverflow:
+
+        BoxLayout:
+            id: graph
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+
+        FileChooser:
+            id: filechooser
+            path: root.current_dir
+            multiselect: False
+            filters: ['*.csv']
+            FileChooserIconLayout
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+
+            Button:
+                text: "Load selected file"
+                on_press: root.load(filechooser.path, filechooser.selection)
+
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+<MainMenu>:
+    info: info
+    file_name: file_name
+
+    BoxLayout:
+        orientation: 'vertical'
+        pos: root.pos
+        size: root.size
+
+        canvas.before:
+            Color:
+                rgba: 0.9, 0.9, 0.9, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            id : info
+            text: 'load file first, please'
+            size_hint_y: 0.2
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: 0.1
+
+            TextInput:
+                id: file_name
+                font_size: 12
+                size_hint_x: 0.7
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: 0.1
+
+            Button:
+                text: 'Load file'
+                size_hint_x: 0.2
+                on_press: root.show_load()
+
+            Button:
+                text: "Exit"
+                id: btnExit
+                size_hint_x: 0.2
+                on_press: app.root_window.close()
