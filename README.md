@@ -16,15 +16,15 @@ omronの体組成計のスマホアプリから出力した測定結果のcsvフ
 
 # Installation
 ```bash
-> pip install kivy
-> pip install pandas
-> pip install matplotlib==3.2.2
+pip install kivy
+pip install pandas
+pip install matplotlib==3.2.2
 ```
 
 もしmatplotlibをすでに新しいバージョンでインストールしている場合は以下コマンドでダウングレードする。
 
 ```bash
-> pip install -U "matplotlib<3.3.0"
+pip install -U "matplotlib<3.3.0"
 ```
 
 # Usage
